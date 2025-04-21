@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Crash Game Predictor",
+  "version": "1.0",
+  "description": "Collects crash game data and predicts crash multipliers using TensorFlow.js",
+  "permissions": ["storage", "activeTab", "scripting","offscreen"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_title": "Crash Predictor",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://abttxx90.best/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["injected.js", "tf.min.js", "model.json", "group1-shard1of1.bin"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  }
+}

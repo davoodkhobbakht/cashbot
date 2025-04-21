@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Crash Predictor</title>
+  <style>
+    body {
+      width: 260px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f4f8;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    #prediction {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+  <h1>📊 Crash Prediction</h1>
+  <p id="prediction">Loading...</p>
+
+  <script>
+    chrome.runtime.sendMessage({ type: 'GET_PREDICTION' }, (res) => {
+      const prediction = res?.prediction || 'No prediction';
+      document.getElementById('prediction').innerText = `🔥 ${prediction}x`;
+    });
+  </script>
+</body>
+</html>
